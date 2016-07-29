@@ -1,5 +1,5 @@
 {
-    "name": "igaponov/wirecard-php-api",
+    "name": "0x4a5k/wirecard-php-api",
     "description": "Wirecard PHP API",
     "keywords": ["wirecard", "api"],
     "minimum-stability": "stable",
@@ -10,6 +10,10 @@
             "name": "Gaponov Igor",
             "email": "jiminy96@gmail.com",
             "role": "developer"
+        },
+        {
+            "name": "Kobyzev Alexander",
+            "email": "aleksander.kobyzev@gmail.com"
         }
     ],
     "require": {

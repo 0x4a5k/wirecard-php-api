@@ -2,10 +2,10 @@
 
 namespace Wirecard\Element;
 
-use Wirecard\Element\Action\Authorization;
 use Wirecard\Element\Action\BookBack;
 use Wirecard\Element\Action\Capture;
 use Wirecard\Element\Action\EnrollmentCheck;
+use Wirecard\Element\Action\OriginalCredit;
 use Wirecard\Element\Action\Preauthorization;
 use Wirecard\Element\Action\Purchase;
 use Wirecard\Element\Action\Query;
@@ -39,11 +39,6 @@ class Job
     public $bookBack;
 
     /**
-     * @var Authorization
-     */
-    public $authorization;
-
-    /**
      * @var Preauthorization
      */
     public $preauthorization;
@@ -62,6 +57,11 @@ class Job
      * @var Reversal
      */
     public $reversal;
+
+    /**
+     * @var OriginalCredit
+     */
+    public $originalCredit;
 
     /**
      * @var Error
@@ -88,14 +88,6 @@ class Job
     {
         $job = new self($signature);
         $job->bookBack = $bookBack;
-
-        return $job;
-    }
-
-    public static function createAuthorizationJob($signature, Authorization $auth)
-    {
-        $job = new self($signature);
-        $job->authorization = $auth;
 
         return $job;
     }
@@ -132,6 +124,14 @@ class Job
         return $job;
     }
 
+    public static function createOriginalCreditJob($signature, OriginalCredit $originalCredit)
+    {
+        $job = new self($signature);
+        $job->originalCredit = $originalCredit;
+
+        return $job;
+    }
+
     private function __construct($signature)
     {
         $this->signature = $signature;
@@ -149,7 +149,8 @@ class Job
             'preauthorization',
             'query',
             'capture',
-            'reversal'
+            'reversal',
+            'originalCredit',
         ] as $action) {
             if ($this->$action) {
                 return $this->$action->transaction;
